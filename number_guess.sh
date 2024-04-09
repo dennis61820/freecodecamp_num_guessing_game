@@ -12,14 +12,11 @@ if [[ ${#USER_NAME} -gt 22 ]]
 then
   echo "Please choose a name with less than 23 characters: "
   GET_USER
-else
-  echo "howdy $USER_NAME"
 fi
 }
 
 GET_USER
 
-echo $USER_NAME
 
 #check if user exists
 ADD_PLAYER=$($PSQL "select name from players where name = '$USER_NAME'")
@@ -27,7 +24,6 @@ if [[ -z $ADD_PLAYER ]]
 then
   # if no add and greet
   ADD_PLAYER=$($PSQL "insert into players(name) values('$USER_NAME')")
-  #let PLAYER_ID = $($PSQL "select player_id from players where name = '$USER_NAME")
   echo "Welcome, $USER_NAME! It looks like this is your first time here."
 # if yes - greet
 else
@@ -37,3 +33,16 @@ else
   echo -e "\nWelcome back, $USER_NAME! You have played $NUM_OF_GAMES games, and your best game took $NUM_OF_GUESSES guesses."
 fi
 
+NUMBER_OF_GUESSES=0
+
+ # generate a number between 1 and 1000
+NUMBER=$(($RANDOM % 1000 + 1))
+#echo -e "\nthe number is $NUMBER"
+ echo -e "\nGuess the secret number between 1 and 1000:"
+   PLAYER_ID=$($PSQL "select player_id from players where name = '$USER_NAME'")
+  # echo -e "\nyour id is $PLAYER_ID"
+   BEGIN_GAME=$($PSQL "insert into games(player_id) values($PLAYER_ID) ")
+
+
+   echo "$USER_NAME"
+   echo "$PLAYER_ID"
