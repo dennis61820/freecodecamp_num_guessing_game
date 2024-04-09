@@ -33,7 +33,7 @@ else
   echo -e "\nWelcome back, $USER_NAME! You have played $NUM_OF_GAMES games, and your best game took $NUM_OF_GUESSES guesses."
 fi
 
-NUMBER_OF_GUESSES=0
+# echo $ADD_PLAYER
 
  # generate a number between 1 and 1000
 NUMBER=$(($RANDOM % 1000 + 1))
@@ -42,7 +42,45 @@ NUMBER=$(($RANDOM % 1000 + 1))
    PLAYER_ID=$($PSQL "select player_id from players where name = '$USER_NAME'")
   # echo -e "\nyour id is $PLAYER_ID"
    BEGIN_GAME=$($PSQL "insert into games(player_id) values($PLAYER_ID) ")
+   GAME_ID=$($PSQL "select max(game_id) from games where player_id = $PLAYER_ID")
+# echo $BEGIN_GAME
+# echo $GAME_ID
+# echo $NUMBER
+ 
 
 
-   echo "$USER_NAME"
-   echo "$PLAYER_ID"
+NUMBER_OF_GUESSES=0
+
+GUESS_NUM () {
+  
+  read GUESS
+  
+   let NUMBER_OF_GUESSES+=1
+  NUM_OF__GUESSES=$($PSQL "update games set num_of_guesses = $NUMBER_OF_GUESSES where (player_id = $PLAYER_ID and game_id = $GAME_ID)")
+ # echo $NUMBER_OF_GUESSES
+   
+  if [[ ! $GUESS =~ ^[0-9]+$ ]]
+  then
+    echo -e "\nThat is not an integer, guess again:"
+    GUESS_NUM 
+  fi
+  
+  # 1 number correct
+    if [[ $GUESS < $NUMBER ]]
+    then
+      echo -e "\nIt's higher than that, guess again:"
+      GUESS_NUM
+  # 2 number low
+    elif [[ $GUESS > $NUMBER ]]
+    then
+      echo -e "\nIt's lower than that, guess again:"
+      GUESS_NUM
+  # 3 number high 
+    else
+      
+      echo -e "\nYou guessed it in $NUMBER_OF_GUESSES tries. The secret number was $NUMBER. Nice job!" 
+    fi
+  
+}
+
+GUESS_NUM

@@ -131,35 +131,26 @@ ALTER TABLE ONLY public.players ALTER COLUMN player_id SET DEFAULT nextval('publ
 -- Data for Name: games; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.games VALUES (15, 17, 0, '2024-04-09');
-INSERT INTO public.games VALUES (16, 17, 0, '2024-04-09');
-INSERT INTO public.games VALUES (17, 18, 0, '2024-04-09');
-INSERT INTO public.games VALUES (18, 18, 0, '2024-04-09');
-INSERT INTO public.games VALUES (19, 17, 0, '2024-04-09');
-INSERT INTO public.games VALUES (20, 17, 0, '2024-04-09');
-INSERT INTO public.games VALUES (21, 17, 0, '2024-04-09');
 
 
 --
 -- Data for Name: players; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.players VALUES (17, 'user_1712690378302');
-INSERT INTO public.players VALUES (18, 'user_1712690378301');
 
 
 --
 -- Name: games_game_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.games_game_id_seq', 21, true);
+SELECT pg_catalog.setval('public.games_game_id_seq', 85, true);
 
 
 --
 -- Name: players_player_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.players_player_id_seq', 18, true);
+SELECT pg_catalog.setval('public.players_player_id_seq', 40, true);
 
 
 --
