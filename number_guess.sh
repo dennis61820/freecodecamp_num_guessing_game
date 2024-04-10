@@ -19,7 +19,7 @@ GET_USER
 
 
 #check if user exists
-ADD_PLAYER=$($PSQL "select name from players where name = '$USER_NAME'")
+NEW_PLAYER=$($PSQL "select name from players where name = '$USER_NAME'")
 if [[ -z $ADD_PLAYER ]]
 then
   # if no add and greet
