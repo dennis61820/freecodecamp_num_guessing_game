@@ -56,7 +56,7 @@ GUESS_NUM () {
   read GUESS
   
    let NUMBER_OF_GUESSES+=1
-  NUM_OF__GUESSES=$($PSQL "update games set num_of_guesses = $NUMBER_OF_GUESSES where (player_id = $PLAYER_ID and game_id = $GAME_ID)")
+  EDIT_NUM_OF__GUESSES=$($PSQL "update games set num_of_guesses = $NUMBER_OF_GUESSES where (player_id = $PLAYER_ID and game_id = $GAME_ID)")
  # echo $NUMBER_OF_GUESSES
    
   if [[ ! $GUESS =~ ^[0-9]+$ ]]
