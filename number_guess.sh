@@ -41,17 +41,12 @@ GET_USER
 
 # start the game
 
-
-
-
 echo -e "\nGuess the secret number between 1 and 1000: "
 
 # guess the number
 GUESS_NUM () {
   BEGIN_GAME=$($PSQL "insert into games(player_id) values($PLAYER_ID) ")
   GAME_ID=$($PSQL "select max(game_id) from games where player_id = $PLAYER_ID")
-  
-  echo $GAME_ID
   
   read GUESS
   
