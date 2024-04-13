@@ -61,12 +61,12 @@ GUESS_NUM () {
   fi
   
   # 1 number correct
-    if [[ $GUESS < $NUMBER ]]
+    if [[ $GUESS -lt $NUMBER ]]
     then
       echo "It's higher than that, guess again: "
       GUESS_NUM
   # 2 number low
-    elif [[ $GUESS > $NUMBER ]]
+    elif [[ $GUESS -gt $NUMBER ]]
     then
       echo "It's lower than that, guess again: "
       GUESS_NUM
