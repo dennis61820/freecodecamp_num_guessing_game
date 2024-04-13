@@ -58,21 +58,15 @@ GUESS_NUM () {
   then
     echo "That is not an integer, guess again: "
     GUESS_NUM 
-  fi
-  
-  # 1 number correct
-    if [[ $GUESS -lt $NUMBER ]]
+  elif [[ $GUESS -lt $NUMBER ]]
     then
       echo "It's higher than that, guess again: "
       GUESS_NUM
-  # 2 number low
-    elif [[ $GUESS -gt $NUMBER ]]
+  elif [[ $GUESS -gt $NUMBER ]]
     then
       echo "It's lower than that, guess again: "
       GUESS_NUM
-  # 3 number high 
-    else
-      
+  else  
       echo "You guessed it in $NUMBER_OF_GUESSES tries. The secret number was $NUMBER. Nice job!" 
     fi
   
