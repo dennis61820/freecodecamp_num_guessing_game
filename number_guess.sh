@@ -24,9 +24,13 @@ else
     ADD_NEW_PLAYER=$($PSQL "insert into players(name) values('$USER_NAME')")
     NEW_PLAYER=$($PSQL "select name from players where name = '$USER_NAME'")
     PLAYER_ID=$($PSQL "select player_id from players where name = '$NEW_PLAYER'")
-    echo "~~~~~~the new player is $NEW_PLAYER and the player id is $PLAYER_ID~~~~~~"
+    echo Welcome, $NEW_PLAYER! It looks like this is your first time here.
   else
-  echo "welcome back $NEW_PLAYER, as you recall your id is $PLAYER_ID"
+    NUM_OF_GAMES=$($PSQL "select count(g.game_date) from games as g join players as p using(player_id) where p.player_id = '$PLAYER_ID'")
+    NUM_OF_GUESSES=$($PSQL "select g.num_guesses from games as g join players as p using(player_id) where p.player_id = '$PLAYER_ID'")
+    BEST_GAME=$($PSQL "select min(g.num_guesses) from games as g join players as p using(player_id) where p.player_id = '$PLAYER_ID'")
+  
+    echo "Welcome back, $NEW_PLAYER! You have played $NUM_OF_GAMES games, and your best game took $BEST_GAME guesses."
   fi
 
 fi
